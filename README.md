@@ -11,8 +11,7 @@ In this challenge, you are tasked with developing an Employee Management System 
 - **Employee Management**: Add, edit, and delete employee information.
 - **Department Management**: Organize companies and their respective departments.
 - **Access Control**: Role-based permissions (Admin, Employee, etc.) to protect data.
-- **Employee Onboarding Workflow**: Process new employee onboarding in an organized and efficient manner.
-- **Interactive User Interface**: A user-friendly design to facilitate management tasks.
+
 
  Live Demo
 
