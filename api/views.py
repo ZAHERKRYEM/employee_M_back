@@ -29,14 +29,15 @@ schema_view = get_schema_view(
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAdminUser]
-
+    permission_classes = [IsAuthenticated,IsAdminOrReadOnly]
+    
 
     def get_queryset(self):
         user_id = self.request.query_params.get('id', None)
         if user_id:
             return User.objects.filter(id=user_id)
         return User.objects.all()
+
 
 class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = CompanySerializer
@@ -111,3 +112,14 @@ def custom_auth_token(request):
             {"error": "Unable to log in with provided credentials."},
             status=status.HTTP_400_BAD_REQUEST,
         )
+    
+@api_view(['POST'])  
+@permission_classes([IsAuthenticated])  
+def logout_view(request):  
+    try:  
+        user=request.user
+        Token.objects.filter(user=user).delete() 
+        
+        return Response({"success": "Logout success."},status=status.HTTP_204_NO_CONTENT)  
+    except (AttributeError, Token.DoesNotExist):  
+        return Response({"error": "Token not found."}, status=status.HTTP_400_BAD_REQUEST)

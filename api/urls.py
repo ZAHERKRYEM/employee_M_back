@@ -10,8 +10,7 @@ router.register(r'employees', views.EmployeeViewSet, basename='employee')
 urlpatterns = [
     path('api/', include(router.urls)),
     path('api/token-auth/', views.custom_auth_token, name='token_auth'),
-
+    path('api/logout/', views.logout_view, name='logout'), 
 
     path('swagger/', views.schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', views.schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

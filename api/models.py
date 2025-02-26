@@ -89,7 +89,7 @@ class Employee(models.Model):
     
     @property
     def work_days(self):
-        if self.hire_date:
+        if self.hire_date and self.status =='active':
             return (date.today() - self.hire_date).days
         return None
     
